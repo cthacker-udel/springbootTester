@@ -7,6 +7,12 @@ import java.util.Set;
 
 public interface requestInterface {
 
+    /*
+
+    Employee Requests
+
+     */
+
     @POST("http://localhost:8080/employee")
     Call<Object> createEmployee(@Body Map<String,Object> map);
 
@@ -28,6 +34,12 @@ public interface requestInterface {
     @PUT("http://localhost:8080/employee/{employeeId}")
     Call<Void> updateEmployee(@Body Map<String,Object> body, @Path("employeeId") Integer employeeId);
 
+    /*
+
+    Server Requests
+
+     */
+
     @POST("http://localhost:8080/admin/create/{collectionName}")
     Call<Void> createCollection(@Path("collectionName") String collectionName);
 
@@ -39,6 +51,12 @@ public interface requestInterface {
 
     @GET("http://localhost:8080/admin/exists/collection/{collectionName}")
     Call<Void> doesCollectionExist(@Path("collectionName") String collectionName);
+
+    /*
+
+    Admin Requests
+
+     */
 
     @POST("http://localhost:8080/admin")
     Call<Void> createAdmin(@Body Map<String,Object> body);
@@ -66,5 +84,14 @@ public interface requestInterface {
 
     @GET("http://localhost:8080/admin/name/{adminName}")
     Call<List<Object>> getAdminByName(@Path("adminName") String adminName);
+
+    /*
+
+    Soccer Player Requests
+
+     */
+
+    @GET("http://localhost:8080/soccer/name/first/{firstName}")
+    Call<Object> getSoccerPlayerByFirstName(@Path("firstName") String firstName);
 
 }
