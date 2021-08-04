@@ -1,0 +1,70 @@
+import retrofit2.Call;
+import retrofit2.http.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public interface requestInterface {
+
+    @POST("http://localhost:8080/employee")
+    Call<Object> createEmployee(@Body Map<String,Object> map);
+
+    @GET("http://localhost:8080/employee")
+    Call<Object> getEmployee(@Query("name") String name);
+
+    @GET("http://localhost:8080/employees")
+    Call<Object> getEmployees();
+
+    @DELETE("http://localhost:8080/employee/{employeeName}")
+    Call<Void> deleteEmployee(@Path("employeeName") String employeeName);
+
+    @DELETE("http://localhost:8080/employee/all")
+    Call<Void> deleteAllEmployees();
+
+    @GET("http://localhost:8080/employee/count")
+    Call<Long> getEmployeeCount();
+
+    @PUT("http://localhost:8080/employee/{employeeId}")
+    Call<Void> updateEmployee(@Body Map<String,Object> body, @Path("employeeId") Integer employeeId);
+
+    @POST("http://localhost:8080/admin/create/{collectionName}")
+    Call<Void> createCollection(@Path("collectionName") String collectionName);
+
+    @GET("http://localhost:8080/admin/list/collections")
+    Call<Set<String>> getCollectionNames();
+
+    @GET("http://localhost:8080/admin/get/{collectionName}")
+    Call<Void> getCollection(@Path("collectionName") String collectionName);
+
+    @GET("http://localhost:8080/admin/exists/collection/{collectionName}")
+    Call<Void> doesCollectionExist(@Path("collectionName") String collectionName);
+
+    @POST("http://localhost:8080/admin")
+    Call<Void> createAdmin(@Body Map<String,Object> body);
+
+    @GET("http://localhost:8080/admin/all")
+    Call<Void> listAllAdmin();
+
+    @GET("http://localhost:8080/admin/names")
+    Call<List<String>> getAdminNames();
+
+    @PUT("http://localhost:8080/admin/{adminId}")
+    Call<Void> updateAdmin(@Path("adminId") Integer adminId, @Body Map<String,Object> body);
+
+    @GET("http://localhost:8080/admin/{adminId}")
+    Call<Void> getAdmin(@Path("adminId") Integer adminId);
+
+    @DELETE("http://localhost:8080/admin/{adminId}")
+    Call<Void> removeAdmin(@Path("adminId") Integer adminId);
+
+    @GET("http://localhost:8080/admin/count")
+    Call<Long> getAdminCount();
+
+    @DELETE("http://localhost:8080/admin")
+    Call<Void> removeAllAdmin();
+
+    @GET("http://localhost:8080/admin/name/{adminName}")
+    Call<List<Object>> getAdminByName(@Path("adminName") String adminName);
+
+}
