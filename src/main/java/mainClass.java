@@ -535,9 +535,29 @@ public class mainClass {
 
     }
 
+    public static Object getSoccerPlayerByLastName() throws IOException {
+
+        String lastName = "";
+        do{
+            System.out.println("Enter in soccer player's last name");
+            lastName = reader.readLine();
+        }while(lastName.length() == 0);
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.getSoccerPlayerByLastName(lastName);
+
+        Response<Object> response = call.execute();
+
+        System.out.println(response.body());
+
+        return response.body();
+
+    }
+
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -618,6 +638,9 @@ public class mainClass {
                     break;
                 case 21:
                     getSoccerPlayerByFirstName();
+                    break;
+                case 22:
+                    getSoccerPlayerByLastName();
                     break;
                 default:
                     break;

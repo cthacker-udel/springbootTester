@@ -94,4 +94,7 @@ public interface requestInterface {
     @GET("http://localhost:8080/soccer/name/first/{firstName}")
     Call<Object> getSoccerPlayerByFirstName(@Path("firstName") String firstName);
 
+    @GET("http://localhost:8080/soccer/name/last/{lastName}")
+    Call<Object> getSoccerPlayerByLastName(@Path("lastName") String lastName);
+
 }
