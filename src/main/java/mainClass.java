@@ -555,9 +555,82 @@ public class mainClass {
 
     }
 
+    public static Object updateByLastName() throws IOException {
+
+        String lastNameQuery = "";
+
+        String newPosition = "";
+        String newFirstName = "";
+        String newDOB = "";
+        Integer newYellowCards = -1;
+        Integer newRedCards = -1;
+
+        do{
+
+            System.out.println("Enter the last name of the soccer player to update");
+            lastNameQuery = reader.readLine();
+
+        }while(lastNameQuery.length() == 0);
+
+        do{
+
+            System.out.println("Enter the new position of the soccer player");
+            newPosition = reader.readLine();
+
+        }while(newPosition.length() == 0);
+
+
+        do{
+
+            System.out.println("Enter the new date of birth of the soccer player");
+            newDOB = reader.readLine();
+
+        }while(newDOB.length() == 0);
+
+
+        do{
+
+            System.out.println("Enter the new First Name of the Soccer Player");
+            newFirstName = reader.readLine();
+
+        }while(newFirstName.length() == 0);
+
+        do{
+
+            System.out.println("Enter the amount of yellow cards");
+            newYellowCards = Integer.parseInt(reader.readLine());
+
+        }while(newYellowCards == -1);
+
+        do{
+
+            System.out.println("Enter the amount of red cards");
+            newRedCards = Integer.parseInt(reader.readLine());
+
+        }while(newRedCards == -1);
+
+        Map<String,Object> body = new LinkedHashMap<>();
+
+        body.put("firstName",newFirstName);
+        body.put("lastName",lastNameQuery);
+        body.put("DOB",newDOB);
+        body.put("position",newPosition);
+        body.put("yellowCards",newYellowCards);
+        body.put("redCards",newRedCards);
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.updateByLastName(lastNameQuery,body);
+
+        Response<Object> response = call.execute();
+
+        return response.body();
+
+    }
+
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -641,6 +714,9 @@ public class mainClass {
                     break;
                 case 22:
                     getSoccerPlayerByLastName();
+                    break;
+                case 23:
+                    updateByLastName();
                     break;
                 default:
                     break;

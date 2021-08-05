@@ -97,4 +97,7 @@ public interface requestInterface {
     @GET("http://localhost:8080/soccer/name/last/{lastName}")
     Call<Object> getSoccerPlayerByLastName(@Path("lastName") String lastName);
 
+    @PUT("http://localhost:8080/soccer/name/last/{lastName}")
+    Call<Object> updateByLastName(@Path("lastName") String lastName, @Body Map<String,Object> body);
+
 }
