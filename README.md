@@ -1,5 +1,5 @@
 
-### Sprint Boot Server - Testing via Retrofit2 Interface \(*coded and executed in IntelliJ*\)
+### Sprint Boot Server - Testing via Retrofit2 Interface \(*coded and executed in IntelliJ gradle project structure*\)
 
 **This program is configurable to your custom local Spring Boot server! Runs entirely via command line input!**
 
