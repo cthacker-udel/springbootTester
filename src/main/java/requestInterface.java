@@ -106,7 +106,10 @@ public interface requestInterface {
     @GET("http://localhost:8080/soccer/red_cards/{redCards}")
     Call<Object> getSoccerPlayerByRedCards(@Path("redCards") Integer redCards);
 
-    @GET("http://localhost:8080/soccer/dob/{DOB}")
+    @GET("http://localhost:8080/soccer/date/{DOB}")
     Call<Object> getSoccerPlayerByDOB(@Path("DOB") String DOB);
+
+    @DELETE("http://localhost:8080/soccer/removeAll")
+    Call<Object> removeAllSoccerPlayers();
 
 }

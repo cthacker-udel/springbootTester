@@ -742,7 +742,7 @@ public class mainClass {
 
         do{
 
-            System.out.println("\nEnter the DOB to query the database for all players with similar DOB in format MM/DD/YYYY");
+            System.out.println("\nEnter the DOB to query the database for all players with similar DOB in format MM-DD-YYYY");
             DOB = reader.readLine();
 
         }while(DOB.length() == 0 && !properDOB(DOB));
@@ -756,9 +756,27 @@ public class mainClass {
         return response.body();
 
     }
+
+    public static Object removeAllSoccerPlayers() throws IOException {
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        try {
+            Call<Object> call = requestInterface.removeAllSoccerPlayers();
+
+            Response<Object> response = call.execute();
+
+            return response.body();
+        }
+        catch(Exception e){
+            return null;
+        }
+
+    }
+
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -854,6 +872,9 @@ public class mainClass {
                     break;
                 case 26:
                     getSoccerPlayerByDOB();
+                    break;
+                case 27:
+                    removeAllSoccerPlayers();
                     break;
                 default:
                     break;
