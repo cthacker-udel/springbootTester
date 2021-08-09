@@ -100,4 +100,7 @@ public interface requestInterface {
     @PUT("http://localhost:8080/soccer/name/last/{lastName}")
     Call<Object> updateByLastName(@Path("lastName") String lastName, @Body Map<String,Object> body);
 
+    @GET("http://localhost:8080/soccer/yellow_cards/{yellowCards}")
+    Call<Object> getSoccerPlayerByYellowCards(@Path("yellowCards") Integer yellowCards);
+
 }
