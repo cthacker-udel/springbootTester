@@ -103,4 +103,7 @@ public interface requestInterface {
     @GET("http://localhost:8080/soccer/yellow_cards/{yellowCards}")
     Call<Object> getSoccerPlayerByYellowCards(@Path("yellowCards") Integer yellowCards);
 
+    @GET("http://localhost:8080/soccer/red_cards/{redCards}")
+    Call<Object> getSoccerPlayerByRedCards(@Path("redCards") Integer redCards);
+
 }
