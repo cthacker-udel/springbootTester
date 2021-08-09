@@ -1,3 +1,4 @@
+import org.intellij.lang.annotations.RegExp;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class mainClass {
 
@@ -708,7 +710,7 @@ public class mainClass {
         return response.body();
     }
 
-    public Object getSoccerPlayerByRedCards() throws IOException {
+    public static Object getSoccerPlayerByRedCards() throws IOException {
 
         Integer redCards = -1;
 
@@ -729,9 +731,34 @@ public class mainClass {
 
     }
 
+    public static boolean properDOB(String dob){
+        Pattern p = Pattern.compile("[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]");
+        return p.matcher(dob).matches();
+    }
+
+    public static Object getSoccerPlayerByDOB() throws IOException {
+
+        String DOB = "";
+
+        do{
+
+            System.out.println("\nEnter the DOB to query the database for all players with similar DOB in format MM/DD/YYYY");
+            DOB = reader.readLine();
+
+        }while(DOB.length() == 0 && !properDOB(DOB));
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.getSoccerPlayerByDOB(DOB);
+
+        Response<Object> response = call.execute();
+
+        return response.body();
+
+    }
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -821,6 +848,12 @@ public class mainClass {
                     break;
                 case 24:
                     getSoccerPlayerYellowCards();
+                    break;
+                case 25:
+                    getSoccerPlayerByRedCards();
+                    break;
+                case 26:
+                    getSoccerPlayerByDOB();
                     break;
                 default:
                     break;
