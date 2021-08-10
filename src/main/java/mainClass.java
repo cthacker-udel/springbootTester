@@ -774,9 +774,85 @@ public class mainClass {
 
     }
 
+    public static Object addSoccerPlayer() throws IOException {
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+
+        String firstName = "";
+        String lastName = "";
+        String DOB = "";
+        String position = "";
+        Integer yellowCards = -1;
+        Integer redCards = -1;
+
+        do{
+
+           System.out.println("Enter first name for soccer player");
+           firstName = reader.readLine();
+
+        }while(firstName.length() == 0);
+
+        do{
+
+            System.out.println("Enter last name for soccer player");
+            lastName = reader.readLine();
+
+        }while(lastName.length() == 0);
+
+        do{
+
+            System.out.println("Enter DOB for soccer player");
+            DOB = reader.readLine();
+
+        }while(DOB.length() == 0);
+
+        do{
+
+            System.out.println("Enter position for soccer player");
+            position = reader.readLine();
+
+        }while(position.length() == 0);
+
+        do{
+
+            System.out.println("Enter the amount of yellow cards for soccer player");
+            yellowCards = Integer.parseInt(reader.readLine());
+
+        }while(yellowCards.intValue() == -1);
+
+        do{
+
+            System.out.println("Enter the amount of red cards for soccer player");
+            redCards = Integer.parseInt(reader.readLine());
+
+        }while(redCards.intValue() == -1);
+
+
+        Map<String,Object> soccerPlayer = new LinkedHashMap<>();
+        soccerPlayer.put("firstName",firstName);
+        soccerPlayer.put("lastName",lastName);
+        soccerPlayer.put("DOB",DOB);
+        soccerPlayer.put("position",position);
+        soccerPlayer.put("yellowCards",yellowCards);
+        soccerPlayer.put("redCards",redCards);
+
+        try{
+
+            Call<Object> call = requestInterface.addSoccerPlayer(soccerPlayer);
+            Response<Object> response = call.execute();
+
+            return response.body();
+        }
+        catch(Exception e){
+            return null;
+        }
+
+    }
+
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Add Soccer Player\n29)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -875,6 +951,9 @@ public class mainClass {
                     break;
                 case 27:
                     removeAllSoccerPlayers();
+                    break;
+                case 28:
+                    addSoccerPlayer();
                     break;
                 default:
                     break;

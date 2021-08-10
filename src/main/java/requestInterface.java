@@ -112,4 +112,7 @@ public interface requestInterface {
     @DELETE("http://localhost:8080/soccer/removeAll")
     Call<Object> removeAllSoccerPlayers();
 
+    @POST("http://localhost:8080/soccer")
+    Call<Object> addSoccerPlayer(@Body Map<String,Object> soccerPlayer);
+
 }
