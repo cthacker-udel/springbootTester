@@ -1042,6 +1042,9 @@ public class mainClass {
                 case 29:
                     addUser();
                     break;
+                case 30:
+                    getUser();
+                    break;
                 default:
                     break;
 
