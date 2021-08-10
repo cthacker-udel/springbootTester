@@ -115,4 +115,10 @@ public interface requestInterface {
     @POST("http://localhost:8080/soccer")
     Call<Object> addSoccerPlayer(@Body Map<String,Object> soccerPlayer);
 
+    @POST("http://localhost:8080/user")
+    Call<Object> addUser(@Body Map<String,Object> user);
+
+    @GET("http://localhost:8080/user/username/{userName}")
+    Call<Object> getUser(@Path("userName") String userName, @Query("auth") String auth);
+
 }
