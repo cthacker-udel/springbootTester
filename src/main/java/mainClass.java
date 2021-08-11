@@ -4,11 +4,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -900,7 +904,7 @@ public class mainClass {
 
     }
 
-    public static Object getUser() throws IOException {
+    public static Object getUser() throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
         String userName = "";
         String secretKey = "";
@@ -932,15 +936,45 @@ public class mainClass {
 
     }
 
+    public static Object getUserByApiKey() throws IOException {
+
+        String apiKey = "";
+        String password = "";
+
+        do{
+
+            System.out.println("Enter the apiKey of the user");
+            apiKey = reader.readLine();
+
+        }while(apiKey.length() == 0);
+
+        do{
+
+            System.out.println("Enter the password backwards of the user");
+            password = reader.readLine();
+
+        }while(password.length() == 0);
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.getUserApiKey(apiKey,password);
+
+        Response<Object> response = call.execute();
+
+        return response.body();
+
+
+    }
+
 
 
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Add Soccer Player\n--- User Methods\n29)Add User\n30)Get User(Auth required)\n31)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Add Soccer Player\n--- User Methods\n29)Add User\n30)Get User(Auth required)\n31)Get User Via ApiKey(Auth required)\n32)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
         int input = 0;
         Scanner stdin = new Scanner(System.in);
@@ -1044,6 +1078,9 @@ public class mainClass {
                     break;
                 case 30:
                     getUser();
+                    break;
+                case 31:
+                    getUserByApiKey();
                     break;
                 default:
                     break;
