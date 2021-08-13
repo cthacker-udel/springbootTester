@@ -966,6 +966,14 @@ public class mainClass {
 
     }
 
+    public static Object getUserViaUsername(){
+
+        String userName;
+        String passowrd;
+        return "";
+
+    }
+
 
 
     public static void printMenu(){
