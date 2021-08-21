@@ -124,4 +124,7 @@ public interface requestInterface {
     @GET("http://localhost:8080/user/apikey/{apiKey}")
     Call<Object> getUserApiKey(@Path("apiKey") String apiKey, @Query("password") String password);
 
+    @GET("http://localhost:8080/user/username/{userName}")
+    Call<Object> getUserUserName(@Path("userName") String userName, @Query("auth") String secretKey);
+
 }

@@ -966,11 +966,42 @@ public class mainClass {
 
     }
 
-    public static Object getUserViaUsername(){
+    // secretkey : thisisasecretkey
 
-        String userName;
-        String passowrd;
-        return "";
+    // yektercesasisiht
+
+    public static Object getUserViaUsername() throws IOException {
+
+        String userName = "";
+        String secretKey = "";
+
+        do{
+
+            System.out.println("Enter user's username to search for");
+            userName = reader.readLine();
+
+        }while(userName.equalsIgnoreCase(""));
+
+        do{
+
+            System.out.println("Enter user's secret key to enter in as password to gain access to database");
+            secretKey = reader.readLine();
+
+        }while(secretKey.equalsIgnoreCase(""));
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.getUserUserName(userName,secretKey);
+
+        Response<Object> response = call.execute();
+
+        return response.body();
+
+    }
+
+    public Object getUserViaPassword(){
+
+        return null;
 
     }
 
@@ -978,7 +1009,7 @@ public class mainClass {
 
     public static void printMenu(){
 
-        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Add Soccer Player\n--- User Methods\n29)Add User\n30)Get User(Auth required)\n31)Get User Via ApiKey(Auth required)\n32)Exit Program\n-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=MENU-=-=-=\n\n--- Employee Methods ---\n1)Add Employee\n2)Get Employee\n3)Get All Employees\n4)Remove Employee\n5)Remove All Employees\n6)Employee Count\n7)Update Employee\n--- Server Methods ---\n8)Create collection\n9)Get Collection Names\n10)Get Collection Object\n11)Test Collection Existence\n--- Admin Methods ---\n12)Create Admin\n13)List All Admin\n14)Update Admin\n15)Get Admin\n16)Remove Admin\n17)Get Admin Count\n18)Remove All Admin\n19)List Admin Names\n20)Get Admin(s) by Name\n--- Soccer Methods\n21)Get Soccer Player by First Name\n22)Get Soccer Player by Last Name\n23)Update Soccer Player by Last Name\n24)Get Player(s) by # of yellow cards\n25)Get Player(s) by # of red cards\n26)Get Player(s) by DOB\n27)Remove all soccer players\n28)Add Soccer Player\n--- User Methods\n29)Add User\n30)Get User(Auth required)\n31)Get User Via ApiKey(Auth required)\n32)Get user via username\n33)Exit Program\n-=-=-=-=-=-=-=-=");
 
     }
 
@@ -1089,6 +1120,9 @@ public class mainClass {
                     break;
                 case 31:
                     getUserByApiKey();
+                    break;
+                case 32:
+                    getUserViaUsername();
                     break;
                 default:
                     break;
