@@ -127,4 +127,7 @@ public interface requestInterface {
     @GET("http://localhost:8080/user/username/{userName}")
     Call<Object> getUserUserName(@Path("userName") String userName, @Query("auth") String secretKey);
 
+    @GET("http://localhost:8080/user/get/password/{thepass}")
+    Call<Object> getUserPassword(@Path("thepass") String thePass, @Query("signature") String secretKey);
+
 }

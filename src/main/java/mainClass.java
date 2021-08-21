@@ -999,9 +999,33 @@ public class mainClass {
 
     }
 
-    public Object getUserViaPassword(){
+    public Object getUserViaPassword() throws IOException {
 
-        return null;
+        String secretKey = "";
+        String password = "";
+
+        do{
+
+            System.out.println("Enter the secret key of the user in reverse for authorization to access database");
+
+            secretKey = reader.readLine();
+
+        }while(secretKey.equalsIgnoreCase(""));
+
+        do{
+
+            System.out.println("Enter the password of the user you are searching for");
+            password = reader.readLine();
+
+        }while(password.equalsIgnoreCase(""));
+
+        requestInterface requestInterface = retrofit.create(requestInterface.class);
+
+        Call<Object> call = requestInterface.getUserPassword(password,secretKey);
+
+        Response<Object> response = call.execute();
+
+        return response.body();
 
     }
 
